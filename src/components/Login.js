@@ -1,12 +1,32 @@
+import React from "react";
+import jwt_decode from 'jwt-decode';
 import styled from 'styled-components';
 import logoImg from '../assets/logo.png';
 
 export default function Login() {
+    function handleCallbackResponse(response) {
+        const userObject = jwt_decode(response.credential);
+        console.log(userObject);
+    }
+
+    React.useEffect(() => {
+        /*global google*/
+        google.accounts.id.initialize({
+            client_id: "403689974756-a8q3tavnsnd4d1obdehoih39o2gte9cc.apps.googleusercontent.com",
+            callback: handleCallbackResponse
+        });
+        google.accounts.id.renderButton(
+            document.getElementById("signInDiv"),
+            { theme: "outline", size: "large" }
+        );
+    }, []);
+
     return (
         <LoginStyled>
             <div>
                 <img src={logoImg} alt="Logo" />
             </div>
+            <div id="signInDiv"></div>
         </LoginStyled>
     );
 }
@@ -19,8 +39,8 @@ const LoginStyled = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: #252E3D;
-
-    div:nth-child(1) {
+    gap: 18rem;
+    &>div:nth-child(1) {
         display: flex;
         justify-content: center;
         align-items: center;
