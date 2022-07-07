@@ -1,6 +1,11 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { useScript } from "./hooks/useScript";
 import jwt_decode from 'jwt-decode';
+
+import { useContext } from "react";
+import UserContext from "../contexts/UserContext";
+
+import { Link, useNavigate } from "react-router-dom";
 
 import styled from 'styled-components';
 import GlobalCss from "../styles/GlobalCss";
@@ -8,8 +13,9 @@ import logoImg from '../assets/logo.png';
 import axios from "axios";
 
 export default function Login() {
+    const navigate = useNavigate();
     const googlebuttonref = useRef();
-    const [user, setuser] = useState(false);
+    const { setUser } = useContext(UserContext);
 
     const onGoogleSignIn = async (user) => {
         try {
@@ -22,8 +28,8 @@ export default function Login() {
                 email,
                 picture
             });
-            console.log(promise.data)
-            setuser(promise.data);
+            setUser(promise.data);
+            navigate("/");
         } catch {
             alert('Signature error');
         }
@@ -48,6 +54,9 @@ export default function Login() {
                 <img src={logoImg} alt="Logo" />
             </div>
             <div ref={googlebuttonref}></div>
+            <Link to="/">
+                Back to home
+            </Link>
         </LoginStyled>
     );
 }
@@ -60,7 +69,7 @@ const LoginStyled = styled.div`
     flex-direction: column;
     align-items: center;
     background-color: #252E3D;
-    gap: 18rem;
+
     &>div:nth-child(1) {
         display: flex;
         justify-content: center;
@@ -71,5 +80,14 @@ const LoginStyled = styled.div`
         background: #e0e0e0;
         box-shadow: 2rem 2rem 2rem #122232, -2rem -2rem 2rem #122232;
         margin-top: 12rem;
+    }
+
+    &>div:nth-child(2) {
+        margin-top: 14rem;
+    }
+
+    a {
+        margin-top: 2rem;
+        color: #e0e0e0;; 
     }
 `;
