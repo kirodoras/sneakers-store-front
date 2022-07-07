@@ -1,32 +1,39 @@
-import React from "react";
+import { useState, useRef } from "react";
+import { useScript } from "./hooks/useScript";
 import jwt_decode from 'jwt-decode';
+
 import styled from 'styled-components';
 import logoImg from '../assets/logo.png';
 
 export default function Login() {
-    function handleCallbackResponse(response) {
-        const userObject = jwt_decode(response.credential);
-        console.log(userObject);
-    }
+    const googlebuttonref = useRef();
+    const [user, setuser] = useState(false);
 
-    React.useEffect(() => {
-        /*global google*/
-        google.accounts.id.initialize({
+    const onGoogleSignIn = async (user) => {
+        let userCred = user.credential;
+        let payload = await jwt_decode(userCred);
+        console.log(payload);
+        setuser(payload);
+    };
+
+    useScript("https://accounts.google.com/gsi/client", () => {
+        window.google.accounts.id.initialize({
             client_id: "403689974756-a8q3tavnsnd4d1obdehoih39o2gte9cc.apps.googleusercontent.com",
-            callback: handleCallbackResponse
+            callback: onGoogleSignIn,
+            auto_select: false,
         });
-        google.accounts.id.renderButton(
-            document.getElementById("signInDiv"),
-            { theme: "outline", size: "large" }
-        );
-    }, []);
+
+        window.google.accounts.id.renderButton(googlebuttonref.current, {
+            size: "large",
+        });
+    });
 
     return (
         <LoginStyled>
             <div>
                 <img src={logoImg} alt="Logo" />
             </div>
-            <div id="signInDiv"></div>
+            <div ref={googlebuttonref}></div>
         </LoginStyled>
     );
 }
