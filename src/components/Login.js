@@ -3,17 +3,30 @@ import { useScript } from "./hooks/useScript";
 import jwt_decode from 'jwt-decode';
 
 import styled from 'styled-components';
+import GlobalCss from "../styles/GlobalCss";
 import logoImg from '../assets/logo.png';
+import axios from "axios";
 
 export default function Login() {
     const googlebuttonref = useRef();
     const [user, setuser] = useState(false);
 
     const onGoogleSignIn = async (user) => {
-        let userCred = user.credential;
-        let payload = await jwt_decode(userCred);
-        console.log(payload);
-        setuser(payload);
+        try {
+            let userCred = user.credential;
+            let payload = await jwt_decode(userCred);
+            const { name, email, picture } = payload;
+            const URL = `http://localhost:5000/sign`;
+            const promise = await axios.post(URL, {
+                name,
+                email,
+                picture
+            });
+            console.log(promise.data)
+            setuser(promise.data);
+        } catch {
+            alert('Signature error');
+        }
     };
 
     useScript("https://accounts.google.com/gsi/client", () => {
@@ -30,6 +43,7 @@ export default function Login() {
 
     return (
         <LoginStyled>
+            <GlobalCss login />
             <div>
                 <img src={logoImg} alt="Logo" />
             </div>

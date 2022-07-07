@@ -11,7 +11,7 @@ const GlobalCss = createGlobalStyle`
         width: 100vw;
         max-width: 100%;
         height: 100vh;
-        background: #FBFBFD;
+        background: ${(props) => props.login ? "#252E3D" : "#FBFBFD"};
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
