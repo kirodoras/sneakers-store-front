@@ -13,7 +13,9 @@ export default function ProductPage() {
             <div className="product-info">
                 <span className="tittle">Nike Air Max</span>
                 <span className="subtittle">Men's Tennis Shoe</span>
-                <span className="description">Description</span>
+                <span className="description">
+                    The Air Force 1 Mid '07 is everything you know well: flawless overlays, bold details and the perfect amount of shine to make you stand out.
+                </span>
                 <span className="price">$90</span>
                 <span className="cart-button">
                     <IoCart />
@@ -68,6 +70,11 @@ const ProductPageStyled = styled.div`
 
     .description {
         font-size: 1.6rem;
+        text-align: justify;
+        text-justify: inter-character;
+        white-space: wrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
         color: #080A0B;
     }
 
