@@ -37,6 +37,39 @@ export default function ProductPage() {
 }
 
 function Product({ product }) {
+    function saveProduct() {
+        sendToStorage(product._id);
+        console.log(product._id);
+    }
+
+    function sendToStorage(id) {
+        let cart = [];
+
+        if (localStorage.getItem("cart") !== null) {
+            let att = false;
+            cart = JSON.parse(localStorage.getItem("cart"));
+            for (let i = 0; i < cart.length; i++) {
+                if (cart[i].id === id) {
+                    cart[i].amount += 1;
+                    att = true;
+                }
+            }
+            if (!att) {
+                cart.push({
+                    id,
+                    amount: 1
+                });
+            }
+            localStorage.setItem("cart", JSON.stringify(cart));
+        } else {
+            cart.push({
+                id,
+                amount: 1
+            });
+            localStorage.setItem("cart", JSON.stringify(cart));
+        }
+    }
+    
     return (
         <ProductPageStyled>
             <div className="product-img">
@@ -49,7 +82,7 @@ function Product({ product }) {
                     {product.description}
                 </span>
                 <span className="price">${product.price}</span>
-                <span className="cart-button">
+                <span className="cart-button" onClick={saveProduct}>
                     <IoCart />
                 </span>
             </div>
