@@ -69,7 +69,7 @@ function Product({ product }) {
             localStorage.setItem("cart", JSON.stringify(cart));
         }
     }
-    
+
     return (
         <ProductPageStyled>
             <div className="product-img">
@@ -163,10 +163,15 @@ const ProductPageStyled = styled.div`
         bottom: 1rem; 
         right: 1.2rem; 
         border: 0.07rem solid #D0D0D0;
-
+        transition:all 0.3s ease-in;
         svg {
             font-size: 2rem;
             color: #293141;
         }
+    }
+
+    .cart-button:active {
+        transform:rotate(360deg);
+        border: 0.4rem solid #D0D0D0;
     }
 `;
