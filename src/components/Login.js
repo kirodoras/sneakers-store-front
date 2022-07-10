@@ -22,7 +22,7 @@ export default function Login() {
             let userCred = user.credential;
             let payload = await jwt_decode(userCred);
             const { name, email, picture } = payload;
-            const URL = `http://localhost:5000/sign`;
+            const URL = `https://sneakers-store-back.herokuapp.com/sign`;
             const promise = await axios.post(URL, {
                 name,
                 email,
