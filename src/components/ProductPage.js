@@ -1,22 +1,54 @@
+import { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { useParams } from 'react-router-dom';
 import { IoCart } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { WaitLoading } from "./shared/WaitLoading";
 
 export default function ProductPage() {
+    const navigate = useNavigate();
     const { idProduct } = useParams();
+    const [product, setProduct] = useState('');
 
+    useEffect(() => {
+        if (idProduct) {
+            const URL = `https://sneakers-store-back.herokuapp.com/product`;
+            const promise = axios.post(URL, {
+                _id: idProduct
+            })
+            promise.then((response) => {
+                setProduct(response.data);
+                console.log(response.data);
+            }).catch((err) => {
+                navigate("/");
+                alert('Erro em buscar produto');
+            });
+        } else {
+            navigate("/");
+        }
+    }, [idProduct, setProduct, navigate]);
+
+    return (
+        <>
+            {product ? <Product product={product}></Product> : <WaitLoading />}
+        </>
+    );
+}
+
+function Product({ product }) {
     return (
         <ProductPageStyled>
             <div className="product-img">
-                <img src="https://i.pinimg.com/564x/c0/d1/cd/c0d1cd569e47a6d7207380d187a06f4c.jpg" alt="Tenis art" />
+                <img src={product.img} alt="Tenis art" />
             </div>
             <div className="product-info">
-                <span className="tittle">Nike Air Max</span>
-                <span className="subtittle">Men's Tennis Shoe</span>
+                <span className="tittle">{product.tittle}</span>
+                <span className="subtittle">{product.subtitle}</span>
                 <span className="description">
-                    The Air Force 1 Mid '07 is everything you know well: flawless overlays, bold details and the perfect amount of shine to make you stand out.
+                    {product.description}
                 </span>
-                <span className="price">$90</span>
+                <span className="price">${product.price}</span>
                 <span className="cart-button">
                     <IoCart />
                 </span>
