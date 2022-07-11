@@ -12,6 +12,7 @@ export default function Home() {
             <img src={user &&  user.picture} alt="Avatar" />
             <span>{user && user.token}</span>
             <Link to="/login">Login</Link>
+            <Link to="/cart">Cart</Link>
         </>
     );
 }
