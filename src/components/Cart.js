@@ -15,11 +15,17 @@ export default function Cart() {
         getStorage();
     }, [att, setAtt]);
 
-    function getStorage(){
+    function getStorage() {
         let cart = [];
         if (localStorage.getItem("cart") !== null) {
             cart = JSON.parse(localStorage.getItem("cart"));
             setProducts(cart);
+        }
+    }
+
+    function sendOrder() {
+        if (products.length > 0) {
+            console.log(products);
         }
     }
 
@@ -35,7 +41,7 @@ export default function Cart() {
                 </Link>
             </CartHeaderStyled>
             <Products products={products} att={() => setAtt(!att)} />
-            <button>
+            <button onClick={sendOrder}>
                 Place order
             </button>
         </CartStyled>
