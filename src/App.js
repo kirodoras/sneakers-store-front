@@ -4,8 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
-import Cart from "./components/Cart";
 import ProductPage from "./components/ProductPage";
+import Cart from "./components/Cart";
 
 import UserContext from "./contexts/UserContext";
 
