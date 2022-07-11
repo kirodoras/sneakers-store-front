@@ -12,9 +12,9 @@ import UserContext from "./contexts/UserContext";
 import ResetCss from "./styles/ResetCss";
 import GlobalCss from "./styles/GlobalCss";
 
-import guest from './assets/guest1.png'
+// import guest from './assets/guest1.png'
 export default function App() {
-    const [user, setUser] = useState({ name: 'Guest', picture: guest });
+    const [user, setUser] = useState({ name: 'Guest', picture: "guest" });
 
     return (
         <UserContext.Provider value={{ user, setUser }}>

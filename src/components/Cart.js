@@ -23,10 +23,15 @@ export default function Cart() {
         }
     }
 
-    function sendOrder() {
-        if (products.length > 0) {
-            console.log(products);
+    const sendOrder = async () => {
+        if (products.length === 0) {
+            alert("Your order cannot be empty!");
+            return;
         }
+        window.localStorage.clear();
+        alert("Your order was sucessfully registered");
+        window.location.reload();
+        
     }
 
     return (
