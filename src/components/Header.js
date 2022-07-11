@@ -9,27 +9,26 @@ const Header = props => {
 }
 
 const Styles = Styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 4rem;
+    max-width: 100%;
+    height: 8rem;
 
     background-color: #252E3D;
     
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 0.4rem;
+    padding: 1.1rem;
 
     img {
         color: white;
-        width: 2rem;
-        border-radius: 20px;
+        width: 3.2rem;
+        border-radius: 50%;
     }
 
     a {
         color: white;
+        margin-left: 2rem;
     }
 
     span {
@@ -37,11 +36,14 @@ const Styles = Styled.div`
         align-items: center;
         
         color: white;
-        font-size: 0.9rem;
+        font-size: 1.2rem;
+        font-weight: 300;
+        color: #FBFBFD;
     }
 
     .user {
         display: flex;
+        gap: 1rem;
         img {
             margin-right: 0.3rem;
         }
@@ -52,9 +54,9 @@ const Styles = Styled.div`
         align-items: center;        
     }
     
-    IoCart {
+    svg {
         margin-top: 0.3rem;
-        font-size: 1.7rem;
+        font-size: 2.5rem;
     }
 `;
 

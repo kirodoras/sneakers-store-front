@@ -9,7 +9,6 @@ import { IoCart } from "react-icons/io5";
 import Header from "./Header";
 import Products from "./Products";
 import Product from "./Product";
-import guest from '../assets/guest1.png';
 
 
 const Home = () => {
@@ -48,7 +47,7 @@ const Home = () => {
                     <span>{ user ? buildName(user.name) : "Guest" }</span>
                 </div>
                 <div className="buttons">    
-                    <Link to="/login" ><span>Login / signup </span></Link>
+                    <Link to="/login" ><span>Login</span></Link>
                     <Link to="/cart" ><IoCart /></Link>
                 </div>
             </Header>
@@ -71,14 +70,13 @@ const Styles = Styled.div`
     flex-direction: column;
     width: inherit;
     max-width: 100%;
-
     h2 {
-        font-size: 1rem;
+        font-size: 1.8rem;
         font-weight: 700;
         margin: 0 0 1.5rem 1.5rem;
     }
 `;
 
 const Space = Styled.div`
-    margin-top: 6rem;
+    margin-top: 2rem;
 `;
