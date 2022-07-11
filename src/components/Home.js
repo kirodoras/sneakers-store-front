@@ -3,10 +3,14 @@ import UserContext from "../contexts/UserContext";
 import { Link } from "react-router-dom";
 import Styled from "styled-components";
 import axios from "axios";
+import { IoCart } from "react-icons/io5";
+
 
 import Header from "./Header";
 import Products from "./Products";
 import Product from "./Product";
+import guest from '../assets/guest1.png';
+
 
 const Home = () => {
     // Variables
@@ -41,12 +45,12 @@ const Home = () => {
         <Styles>
             <Header>
                 <div className="user">
-                    <img src={ user.picture } alt="Avatar" />
-                    <span>{ buildName(user.name) }</span>
+                    <img src={ user ? user.picture : "guest" } alt="Avatar" />
+                    <span>{ user ? buildName(user.name) : "Guest" }</span>
                 </div>
                 <div className="buttons">    
                     <Link to="/login" ><span>Login / signup </span></Link>
-                    <Link to="/cart" ><ion-icon name="cart"></ion-icon></Link>
+                    <Link to="/cart" ><IoCart /></Link>
                 </div>
             </Header>
             <Space />

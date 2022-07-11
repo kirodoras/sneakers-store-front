@@ -52,7 +52,7 @@ const Styles = Styled.div`
         align-items: center;        
     }
     
-    ion-icon {
+    IoCart {
         margin-top: 0.3rem;
         font-size: 1.7rem;
     }

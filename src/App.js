@@ -5,6 +5,8 @@ import Login from "./components/Login";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
+import ProductPage from "./components/ProductPage";
+
 import UserContext from "./contexts/UserContext";
 
 import ResetCss from "./styles/ResetCss";
@@ -22,7 +24,8 @@ export default function App() {
                 <Routes>
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/cart" element={<Cart />} />                    
+                    <Route path="/product/:idProduct" element={<ProductPage />}/>
+                    <Route path="/cart" element={<Cart />}/>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </BrowserRouter>
