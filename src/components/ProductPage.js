@@ -37,9 +37,10 @@ export default function ProductPage() {
 }
 
 function Product({ product }) {
+    const [amount, setAmount] = useState(1);
+
     function saveProduct() {
         sendToStorage(product._id);
-        console.log(product._id);
     }
 
     function sendToStorage(id) {
@@ -50,23 +51,35 @@ function Product({ product }) {
             cart = JSON.parse(localStorage.getItem("cart"));
             for (let i = 0; i < cart.length; i++) {
                 if (cart[i].id === id) {
-                    cart[i].amount += 1;
+                    cart[i].amount += amount;
                     att = true;
                 }
             }
             if (!att) {
                 cart.push({
                     id,
-                    amount: 1
+                    amount: amount
                 });
             }
             localStorage.setItem("cart", JSON.stringify(cart));
         } else {
             cart.push({
                 id,
-                amount: 1
+                amount: amount
             });
             localStorage.setItem("cart", JSON.stringify(cart));
+        }
+    }
+
+    function increment() {
+        if (amount < 10) {
+            setAmount(amount + 1);
+        }
+    }
+
+    function decrement() {
+        if (amount > 1) {
+            setAmount(amount - 1);
         }
     }
 
@@ -85,8 +98,25 @@ function Product({ product }) {
                 <span className="cart-button" onClick={saveProduct}>
                     <IoCart />
                 </span>
+                <Counter amount={amount} increment={increment} decrement={decrement} />
             </div>
         </ProductPageStyled>
+    );
+}
+
+function Counter({ amount, increment, decrement }) {
+    return (
+        <CounterStyled>
+            <button className="plus" onClick={increment}>
+                +
+            </button>
+            <div className="value">
+                {amount}
+            </div>
+            <button className="minus" onClick={decrement}>
+                -
+            </button>
+        </CounterStyled>
     );
 }
 
@@ -173,5 +203,42 @@ const ProductPageStyled = styled.div`
     .cart-button:active {
         transform:rotate(360deg);
         border: 0.4rem solid #D0D0D0;
+    }
+`;
+
+const CounterStyled = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: absolute;
+    bottom: 1.6rem; 
+    right: 6.3rem; 
+    .plus {
+        background-color: #28a745;
+    }
+    .minus {
+        background-color: #dc3545;
+    }
+    .plus, .minus {
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        border: none;
+        color: white;
+        font-size: 1.5rem;
+    }
+
+    .value {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 3rem;
+        height: 3rem;
+        font-size: 2.2rem;
+        font-weight: 500;
+    }
+
+    .cell *:active {
+        filter: brightness(1.2);
     }
 `;
