@@ -140,7 +140,7 @@ const ProductPageStyled = styled.div`
         top: 1rem;
         left: 1rem;
         font-size: 4rem;
-        border: 0.15rem solid #293141;
+        border: 0.15rem solid #FFF;
         border-radius: 1rem;
         color: #FFF;
     }
