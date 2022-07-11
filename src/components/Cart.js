@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import defaultUser from '../assets/defaultUser.png';
 import { useContext } from "react";
 import UserContext from "../contexts/UserContext";
@@ -8,6 +8,7 @@ import { IoArrowUndoSharp } from "react-icons/io5";
 import axios from "axios";
 
 export default function Cart() {
+    const navigate = useNavigate();
     const { user } = useContext(UserContext);
     const [products, setProducts] = useState([]);
     const [att, setAtt] = useState(false);
@@ -28,10 +29,15 @@ export default function Cart() {
             alert("Your order cannot be empty!");
             return;
         }
-        window.localStorage.clear();
-        alert("Your order was sucessfully registered");
-        window.location.reload();
-        
+        if(typeof user.token === 'string'){
+            window.localStorage.clear();
+            alert("Your order was sucessfully registered");
+            navigate("/");
+            return;
+        } else {
+            alert("You need an account");
+            navigate("/login");
+        }
     }
 
     return (
@@ -220,7 +226,6 @@ const CartHeaderStyled = styled.header`
     div>img {
         width: 3.2rem;
         border-radius: 50%;
-        background-color: #FBFBFD;
     }
 
     div>span {

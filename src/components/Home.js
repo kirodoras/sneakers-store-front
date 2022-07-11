@@ -5,7 +5,7 @@ import Styled from "styled-components";
 import axios from "axios";
 import { IoCart } from "react-icons/io5";
 
-
+import defaultUser from '../assets/defaultUser.png';
 import Header from "./Header";
 import Products from "./Products";
 import Product from "./Product";
@@ -43,8 +43,8 @@ const Home = () => {
         <Styles>
             <Header>
                 <div className="user">
-                    <img src={ user ? user.picture : "guest" } alt="Avatar" />
-                    <span>{ user ? buildName(user.name) : "Guest" }</span>
+                    <img src={ user ? user.picture : defaultUser} alt="Avatar" />
+                    <span>{ user ? buildName(user.name) : "Hey there"}</span>
                 </div>
                 <div className="buttons">    
                     <Link to="/login" ><span>Login</span></Link>
