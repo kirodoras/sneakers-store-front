@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home";
+import Cart from "./components/Cart";
 import ProductPage from "./components/ProductPage";
 import UserContext from "./contexts/UserContext";
 
@@ -22,6 +23,7 @@ export default function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/login" element={<Login />} />
                     <Route path="/product/:idProduct" element={<ProductPage />}/>
+                    <Route path="/cart" element={<Cart />}/>
                     <Route path="*" element={<NotFound />} />
                 </Routes>
             </BrowserRouter>
