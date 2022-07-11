@@ -20,8 +20,7 @@ const Home = () => {
     // Logic
     useEffect(async () => {
         const API = "https://sneakers-store-back.herokuapp.com";
-        const promise = axios.get(`${API}/products`);
-        
+
         try {
             const response = await axios.get(`${API}/products`);
             setProducts(response.data)

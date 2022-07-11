@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
-import { IoCart } from "react-icons/io5";
+import { useParams, Link } from 'react-router-dom';
+import { IoCart, IoArrowUndoSharp } from "react-icons/io5";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { WaitLoading } from "./shared/WaitLoading";
@@ -87,6 +87,9 @@ function Product({ product }) {
         <ProductPageStyled>
             <div className="product-img">
                 <img src={product.img} alt="Tenis art" />
+                <Link to="/">
+                    <IoArrowUndoSharp />
+                </Link>
             </div>
             <div className="product-info">
                 <span className="tittle">{product.tittle}</span>
@@ -128,9 +131,19 @@ const ProductPageStyled = styled.div`
     flex-direction: column;
 
     .product-img {
+        position: relative;
         width: 100%;
         height: 50%;
-    }   
+    }
+    .product-img svg {
+        position: absolute;
+        top: 1rem;
+        left: 1rem;
+        font-size: 4rem;
+        border: 0.15rem solid #293141;
+        border-radius: 1rem;
+        color: #FFF;
+    }
 
     .product-img img {
         width: 100%;
