@@ -5,10 +5,12 @@ import Styled from "styled-components";
 import axios from "axios";
 import { IoCart } from "react-icons/io5";
 
+
 import Header from "./Header";
 import Products from "./Products";
 import Product from "./Product";
-// import guest from '../assets/guest1.png';
+import guest from '../assets/guest1.png';
+
 
 const Home = () => {
     // Variables
